@@ -1,6 +1,6 @@
 import pyttsx3  # text to speech recognition package
 import datetime
-import speech_recognition as sr
+import speech_recognition as sr 
 
 machine = pyttsx3.init()  # initialisation of the module, variable machine refers to the assistant
 
@@ -56,4 +56,22 @@ def greetme():
 
     speech("Bambang at your service, how can I help you?")
 
-greetme()
+def takeCommand():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening...")
+        r.pause_threshold = 1
+        audio = r.listen(source)
+
+    try:
+        print("Recognizing...")
+        query = r.recognize_google(audio, language='en-in')
+        print(query)
+    
+    except Exception as e:
+        print(e)
+        speech("Say that again please")
+        return "None"
+    return query
+
+takeCommand()
