@@ -12,7 +12,7 @@ def speech(audio):
 
 def time():
     currentTime = datetime.datetime.now().strftime("%I:%M:%S")
-    speech("the time is" + currentTime)
+    speech("the current time is" + currentTime)
 
 
 def year():
@@ -38,7 +38,22 @@ def date():
         12: 'December'
     }
     currentDate = str(datetime.datetime.now().day)
-    speech(currentDate + switcher.get(currentMonth) + currentYear)
+    speech("today's date is" + currentDate + switcher.get(currentMonth) + currentYear)
 
+def greetme():
+    speech("Welcome back!")
+    time()
+    date()
+    hour = datetime.datetime.now().hour
+    if hour >= 6 and hour <12:
+        speech("Good morning!")
+    elif hour >=12 and hour <18:
+        speech("Good afternoon!")
+    elif hour >=18 and hour <24:
+        speech("Good evening!")
+    else:
+        speech("Good night!")
 
-date()
+    speech("Bambang at your service, how can I help you?")
+
+greetme()
